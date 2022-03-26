@@ -24,7 +24,8 @@ let s:col.light_bg   = ['#1d2023', 236]
 let s:col.lighter_bg = ['#242629', 238]
 let s:col.comment    = ['#5c6366', 244]
 let s:col.selection  = ['#2D3032', 238]
-let s:col.string     = ['#37ad82', 72]
+let s:col.string     = ['#8cd0d3', 116]
+let s:col.number     = ['#cc9393', 174]
 let s:col.type       = ['#7398dd', 104]
 let s:col.constant   = ['#ca70d6', 170]
 let s:col.error      = ['#c15959', 131]
@@ -137,6 +138,9 @@ call s:HL('SpellBad',   'error',   'none',       'bold,underline')
 call s:HL('SpellCap',   'error',   'none',       'bold,underline')
 call s:HL('SpellLocal', 'special', 'none',       'bold,underline')
 call s:HL('SpellRare',  'special', 'none',       'bold,underline')
+
+syn match myOperators "[:=!?*&^-]"
+hi def link myOperators Operator
 
 hi link Terminal                 Normal
 hi link Number                   Constant
