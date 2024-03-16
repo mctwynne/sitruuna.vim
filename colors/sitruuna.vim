@@ -12,9 +12,14 @@ let g:colors_name="sitruuna"
 " Colors {{{
 let s:col            = {}
 let s:col.lemon      = ['#FAC03B', 220]
-let s:col.special    = ['#ffb354', 215]
+let s:col.special    = ['#ffda54', 215]
+" let s:col.special    = ['#ffb354', 215]
+let s:col.match_paren    = ['#99f8ff', 215]
+" let s:col.match_paren    = ['#115511', 215]
+" let s:col.match_paren    = ['#ffffff', 255]
 let s:col.preproc    = ['#a29bfe', 147]
 let s:col.function   = ['#a3db81', 117]
+let s:col.keyword   = ['#acfcbd', 117]
 let s:col.foreground = ['#d1d1d1', 188]
 let s:col.fg_alt     = ['#a1a1a1', 145]
 let s:col.statusline = ['#34373a', 137]
@@ -24,12 +29,14 @@ let s:col.light_bg   = ['#1d2023', 236]
 let s:col.lighter_bg = ['#242629', 238]
 let s:col.comment    = ['#5c6366', 244]
 let s:col.selection  = ['#2D3032', 238]
+" let s:col.string     = ['#37ad82', 72]
 let s:col.string     = ['#8cd0d3', 116]
 let s:col.number     = ['#cc9393', 174]
 let s:col.type       = ['#7398dd', 104]
 let s:col.constant   = ['#ca70d6', 170]
 let s:col.error      = ['#c15959', 131]
 let s:col.none       = ['NONE', 'NONE']
+let s:col.white       = ['#ffffff', 'NONE']
 " }}}
 " Highlighting Function from https://github.com/sjl/badwolf {{{
 function! s:HL(group, fg, ...)
@@ -76,18 +83,22 @@ call s:HL('EndOfBuffer',     'lighter_bg')
 call s:HL('LineNr',          'comment',    'light_bg')
 call s:HL('FoldColumn',      'lighter_bg', 'darker')
 call s:HL('Folded',          'fg_alt',    'statusline')
-call s:HL('MatchParen',      'special',    'none',       'bold')
+call s:HL('MatchParen',      'comment',    'match_paren',       'bold')
 call s:HL('SignColumn',      'lighter_bg', 'darker')
 call s:HL('Comment',         'comment',    'none')
 call s:HL('Conceal',         'error',      'none')
-call s:HL('Constant',        'constant',   'none')
+call s:HL('Constant',        'white',   'none')
 call s:HL('Error',           'error',      'none',       'none')
 call s:HL('Identifier',      'function',       'none')
 call s:HL('Ignore',          'comment',    'none')
 call s:HL('PreProc',         'preproc',    'none')
 call s:HL('Special',         'special',    'none')
 call s:HL('Statement',       'lemon',      'none',       'bold')
+call s:HL('cStatement',      'special',      'none',       'bold')
 call s:HL('String',          'string',     'none')
+call s:HL('Number',          'white',     'none')
+" call s:HL('Keyword',          'keyword',     'none')
+call s:HL('Keyword',          'lemon',     'none')
 call s:HL('Todo',            'background', 'string')
 call s:HL('Type',            'type',       'none',       'none')
 call s:HL('Underlined',      'function',   'none')
@@ -131,16 +142,15 @@ call s:HL('htmlTag',         'foreground', 'none')
 call s:HL('htmlArg',         'function',   'none')
 
 
+call s:HL('CurSearch',  'special', 'background', 'reverse,bold')
 call s:HL('IncSearch',  'special', 'background', 'reverse,bold')
-call s:HL('Search',     'special', 'background', 'reverse,bold')
+call s:HL('Search',     'error', 'selection', 'none')
 call s:HL('Substitute', 'special', 'background', 'reverse,bold')
 call s:HL('SpellBad',   'error',   'none',       'bold,underline')
 call s:HL('SpellCap',   'error',   'none',       'bold,underline')
 call s:HL('SpellLocal', 'special', 'none',       'bold,underline')
 call s:HL('SpellRare',  'special', 'none',       'bold,underline')
 
-syn match myOperators "[:=!?*&^-]"
-hi def link myOperators Operator
 
 hi link Terminal                 Normal
 hi link Number                   Constant
@@ -155,7 +165,7 @@ hi link Float                    Number
 hi link HelpCommand              Statement
 hi link HelpExample              Statement
 hi link Include                  PreProc
-hi link Keyword                  Statement
+hi link Keyword                  Keyword
 hi link Label                    Statement
 hi link Macro                    PreProc
 hi link Number                   Constant
@@ -163,7 +173,8 @@ hi link PreCondit                PreProc
 hi link Repeat                   Statement
 hi link SpecialChar              Special
 hi link SpecialComment           Special
-hi link StorageClass             Statement
+hi link StorageClass             Keyword
+" hi link StorageClass             Statement
 hi link Structure                Statement
 hi link Tag                      Special
 hi link Terminal                 Normal
@@ -189,6 +200,7 @@ hi link diffRemoved              DiffDelete
 hi link diffAdded                DiffAdd
 hi link QuickFixLine             Search
 hi link ConId                    Type
+hi link customOperator                 Statement
 
 " Yaml
 hi link yamlBlockMappingKey Statement
@@ -212,7 +224,9 @@ hi link cssProp       Special
 hi link fugitiveHash Constant
 
 " Python
-hi link pythonBuiltin Constant
+" hi link pythonBuiltin Keyword
+hi link pythonBuiltin Statement
+hi link pythonExceptions Keyword
 
 " 'MaxMEllon/vim-jsx-pretty'
 hi link jsxComponentName Statement
