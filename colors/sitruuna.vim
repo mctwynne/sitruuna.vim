@@ -19,6 +19,7 @@ let s:col.match_paren    = ['#99f8ff', 215]
 " let s:col.match_paren    = ['#ffffff', 255]
 let s:col.preproc    = ['#a29bfe', 147]
 let s:col.function   = ['#a3db81', 117]
+let s:col.identifier   = ['#a3db81', 117]
 let s:col.keyword   = ['#acfcbd', 117]
 let s:col.foreground = ['#d1d1d1', 188]
 let s:col.fg_alt     = ['#a1a1a1', 145]
@@ -98,9 +99,9 @@ call s:HL('cStatement',      'special',      'none',       'bold')
 call s:HL('String',          'string',     'none')
 call s:HL('Number',          'white',     'none')
 " call s:HL('Keyword',          'keyword',     'none')
-call s:HL('Keyword',          'lemon',     'none')
+call s:HL('Keyword',          'keyword',     'none')
 call s:HL('Todo',            'background', 'string')
-call s:HL('Type',            'type',       'none',       'none')
+call s:HL('Type',            'identifier',       'none',       'none')
 call s:HL('Underlined',      'function',   'none')
 call s:HL('Pmenu',           'foreground', 'light_bg')
 call s:HL('PmenuSbar',       'light_bg',   'light_bg')
@@ -242,6 +243,10 @@ hi link NeomakeVirtualtextError ErrorMsg
 hi link NeomakeVirtualtextWarning WarningMsg
 hi link NeomakeVirtualtextMessage WarningMsg
 hi link NeomakeVirtualtextInfo Type
+
+hi link @lsp.type.function NONE
+hi link @lsp.type.parameter NONE
+hi link @lsp.type.property NONE
 
 " Fzf
 if get(g:, 'sitruuna_fzf', 1) == 1
